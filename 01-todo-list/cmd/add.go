@@ -31,6 +31,9 @@ to quickly create a Cobra application.`,
 
 		utils.WriteFile(file, args[0])
 		// utils.GetLastID(file)
+
+		getAll, _ := cmd.Flags().GetBool("all")
+		fmt.Printf("%T\t%v\n", getAll, getAll)
 	},
 }
 
@@ -46,4 +49,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// addCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	addCmd.PersistentFlags().BoolP("all", "a", false, "List all tasks")
 }

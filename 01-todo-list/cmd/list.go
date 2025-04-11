@@ -1,11 +1,12 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"log"
+	"todolist/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -22,6 +23,22 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("list called")
+		file, err := utils.LoadFile()
+		if err != nil {
+			log.Panic(err)
+		}
+		defer file.Close()
+		tasks, err := utils.ReadFile(file)
+		if err != nil {
+			log.Panic(err)
+		}
+
+		getAll, err := cmd.Flags().GetBool("all")
+		if err != nil {
+			log.Panic(err)
+		}
+		utils.ShowList(tasks, getAll)
+
 	},
 }
 
@@ -37,4 +54,5 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// listCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	listCmd.PersistentFlags().BoolP("all", "a", false, "List all tasks")
 }

@@ -2,9 +2,11 @@ package utils
 
 import (
 	"encoding/csv"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
+	"text/tabwriter"
 	"time"
 
 	"github.com/mergestat/timediff"
@@ -66,6 +68,50 @@ func WriteFile(file *os.File, task string) {
 		strconv.Itoa(id + 1), task, strTime, "false",
 	}
 	writer.Write(record)
+}
+
+func ReadFile(file *os.File) ([]TaskData, error) {
+	tasks := make([]TaskData, 0)
+
+	reader := csv.NewReader(file)
+	records, err := reader.ReadAll()
+	if err != nil {
+		return tasks, err
+	}
+
+	for _, record := range records {
+		data, err := rowToTaskData(record)
+		if err != nil {
+			return tasks, err
+		}
+		tasks = append(tasks, data)
+	}
+	return tasks, nil
+}
+
+func ShowList(tasks []TaskData, flag bool) {
+	w := new(tabwriter.Writer)
+	// w.Init(os.Stdout, 0, 8, 0, '\t', 0)
+	w.Init(os.Stdout, 0, 8, 3, '\t', 0)
+
+	if flag {
+		fmt.Fprintln(w, "ID\tTask\tCreated\tDone\t")
+	} else {
+		fmt.Fprintln(w, "ID\tTask\tCreated\t")
+	}
+
+	for _, task := range tasks {
+		if flag {
+			fmt.Fprintf(w, "%v\t%v\t%v\t%v\t\n", task.id, task.task, task.created, task.done)
+		} else {
+			if !task.done {
+				fmt.Fprintf(w, "%v\t%v\t%v\t\n", task.id, task.task, task.created)
+			}
+		}
+	}
+
+	fmt.Fprintln(w)
+	w.Flush()
 }
 
 func getLastID(file *os.File) (int, error) {

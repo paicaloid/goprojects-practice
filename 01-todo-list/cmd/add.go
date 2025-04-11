@@ -30,10 +30,7 @@ to quickly create a Cobra application.`,
 		defer file.Close()
 
 		utils.WriteFile(file, args[0])
-		// utils.GetLastID(file)
 
-		getAll, _ := cmd.Flags().GetBool("all")
-		fmt.Printf("%T\t%v\n", getAll, getAll)
 	},
 }
 

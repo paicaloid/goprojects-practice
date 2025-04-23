@@ -5,7 +5,7 @@ described in the [YouTube video by Dreams of Code](https://youtu.be/gXmznGEW9vo)
 
 Inside of this repository are 5 directories, each representing a single project idea.
 
-Each of the project ideas contain a README and any supplementary resources or advice to help you build 
+Each of the project ideas contain a README and any supplementary resources or advice to help you build
 the project.
 
 ## 01 - Todo List CLI
@@ -34,3 +34,23 @@ This last project is to build a currency converter for the terminal which uses t
 # General Getting Started Advice
 
 For all projects, make sure you start off with a `main.go` and using `go mod init`
+
+
+# Self-Learning Resources
+using this [Youtube playlist](https://www.youtube.com/playlist?list=PLwZ0y9k-cYXAJESl_kMGMQtXaSYpRV5U2)
+
+## 06 - fiber-backend
+
+This project is to build a simple backend using the fiber framework. The goal is to create a simple CRUD API for managing a list of books.
+
+## 07 - GORM
+
+This project is to build a simple CRUD API using GORM. The goal is to create a simple CRUD API for managing a list of books.
+
+## 08 - Go with Hexagonal Architecture
+
+This project is to build a simple CRUD API using Hexagonal Architecture. The goal is to create a simple CRUD API for managing a list of books.
+
+## 09 - Go with Clean Architecture
+
+This project is to build a simple CRUD API using Clean Architecture. The goal is to create a simple CRUD API for managing a list of books.
